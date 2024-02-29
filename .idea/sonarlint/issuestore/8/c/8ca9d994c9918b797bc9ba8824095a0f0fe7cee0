@@ -1,0 +1,17 @@
+
+i
+java:S2095I"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµþÿÿÿÿ8¾é„ØÞ1
+i
+java:S2095$"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµþÿÿÿÿ8¿é„ØÞ1
+i
+java:S2095`"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµþÿÿÿÿ8¾é„ØÞ1
+i
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµþÿÿÿÿ8¾é„ØÞ1
+q
+java:S2095<"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(â…ÍÆÿÿÿÿÿ8¿é„ØÞ1
+q
+java:S2095."OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(â…ÍÆÿÿÿÿÿ8¾é„ØÞ1
+ž
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ñ½†š8¹ÔË­ß1
+U
+java:S1128"8Remove this unused import 'jm.task.core.jdbc.util.Util'.(õ¥ãô8ÿøË­ß1

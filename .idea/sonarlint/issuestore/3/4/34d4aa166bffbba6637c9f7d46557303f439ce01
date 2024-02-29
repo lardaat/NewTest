@@ -1,0 +1,15 @@
+
+‹
+java:S1130"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Á¯¦ş8Í¬êÓŞ1
+\
+java:S1128":Remove this unused import 'jm.task.core.jdbc.dao.UserDao'.(½ÛÃøÿÿÿÿ8Ø­»¡ß1
+d
+java:S1128"BRemove this unused import 'jm.task.core.jdbc.dao.UserDaoJDBCImpl'.(äšÉàøÿÿÿÿ8Ù­»¡ß1
+U
+java:S1128"8Remove this unused import 'jm.task.core.jdbc.util.Util'.(õ¥ãô8Ù­»¡ß1
+O
+java:S1128	"2Remove this unused import 'org.postgresql.Driver'.(£Ÿ…§8Ù­»¡ß1
+M
+java:S1128"0Remove this unused import 'java.sql.Connection'.(¥ËôÖ8Ú­»¡ß1
+P
+java:S1128"3Remove this unused import 'java.sql.DriverManager'.(“£°8Ú­»¡ß1
