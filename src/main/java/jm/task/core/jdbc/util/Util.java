@@ -1,38 +1,41 @@
 package jm.task.core.jdbc.util;
+import jm.task.core.jdbc.model.User;
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public final class Util {
+public class Util {
+    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "postgres";
 
-    private final static String PASSWORD = "postgres";
-    private final static String USERNAME = "postgres";
-    private final static String URL = "jdbc:postgresql://localhost:5432/postgres";
-
-    static {
-        loadDriver(); // Это необходимо для того, что бы работать с кодом написанным до Java 1.8
-    }
-
-    private Util(){
-
-    }
-
-    public static Connection open(){
+    public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error connecting to the database", e);
         }
     }
 
-    private static void loadDriver(){
+    public static SessionFactory getHibernateConnection() {
+        Configuration configuration = new Configuration()
+                .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+                .setProperty("hibernate.connection.url", URL)
+                .setProperty("hibernate.connection.username", USERNAME)
+                .setProperty("hibernate.connection.password", PASSWORD)
+                .setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
+                .setProperty("hibernate.hbm2ddl.auto", "none")
+                .setProperty("hibernate.connection.show_sql", "true")
+                .addAnnotatedClass(User.class);
+     //   configuration.configure();
         try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            return configuration.buildSessionFactory();
+        } catch (HibernateException e) {
+            throw new RuntimeException("Hibernate Error connecting to the database" + e);
         }
-    }
 
-    // реализуйте настройку соеденения с БД
+    }
 }

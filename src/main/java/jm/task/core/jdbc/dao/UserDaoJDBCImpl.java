@@ -11,7 +11,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     private Connection connection;
     public UserDaoJDBCImpl() {
-        connection = Util.open();
+
     }
 
     public void createUsersTable() {

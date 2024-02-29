@@ -15,10 +15,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        //Сlass<Driver> driverClass = Driver.class;
-       /* try (var connection = Util.open()) {
-            System.out.println(connection.getClientInfo());
-        }*/
 
         UserService userService = new UserServiceImpl();
 
