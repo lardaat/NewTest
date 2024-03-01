@@ -18,35 +18,46 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
+        Transaction transaction = null;
         String SQL = "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, name VARCHAR(255), lastname VARCHAR(255), age SMALLINT)";
         try (Session session = Util.getHibernateConnection().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.createNativeQuery(SQL).executeUpdate();
             transaction.commit();
             System.out.println("Таблица создана");
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Ошибка при создании таблицы с Hibernate: " + e.getMessage());
         }
     }
 
+
+
     @Override
     public void dropUsersTable() {
+        Transaction transaction = null;
         String SQL = "DROP TABLE IF EXISTS users";
         try (Session session = Util.getHibernateConnection().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.createNativeQuery(SQL).executeUpdate();
             transaction.commit();
             System.out.println("Таблица удалена");
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Ошибка при удалении таблицы c Hibernate: " + e.getMessage());
         }
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
+        Transaction transaction = null;
         String SQL = "INSERT INTO users (name, lastname, age) VALUES (?,?,?)";
         try (Session session = Util.getHibernateConnection().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             NativeQuery query = session.createNativeQuery(SQL);
             query.setParameter(1, name);
             query.setParameter(2, lastName);
@@ -55,29 +66,37 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             System.out.println("Пользователь с именем "+ name + " добавлен в базу данных");
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Ошибка при добавлении " + name + " c Hibernate: " + e.getMessage());
         }
     }
 
     @Override
     public void removeUserById(long id) {
+        Transaction transaction = null;
         String SQL = "DELETE FROM users WHERE id = ?";
         try (Session session = Util.getHibernateConnection().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             NativeQuery query = session.createNativeQuery(SQL);
             query.setParameter(1, id);
             query.executeUpdate();
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Ошибка при удалении c Hibernate: " + e.getMessage());
         }
     }
 
     @Override
     public List<User> getAllUsers() {
+        Transaction transaction = null;
         String SQL = "SELECT * FROM users";
         try (Session session = Util.getHibernateConnection().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             List<Object[]> rows = session.createNativeQuery(SQL).list();
             List<User> userList = new ArrayList<>();
             for (Object[] row : rows) {
@@ -91,18 +110,25 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             return userList;
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Ошибка при возвращении списка users c Hibernate: " + e.getMessage());
         }
     }
 
     @Override
     public void cleanUsersTable() {
+        Transaction transaction = null;
         String SQL = "DELETE FROM users";
         try (Session session = Util.getHibernateConnection().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.createNativeQuery(SQL).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Ошибка при очищении таблицы с Hibernate: " + e.getMessage());
         }
     }
